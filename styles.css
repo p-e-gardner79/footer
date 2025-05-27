@@ -1,0 +1,169 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 100%;
+}
+
+h3 {
+    color: #82cff4;
+}
+
+p {
+    font-size:1rem;
+}
+
+a {
+    font-size:1rem;
+}
+
+footer {
+    background-color: #183850;
+    display: flex;
+    gap: 20px;
+    padding: 30px 20px 20px 20px;
+    align-items: flex-start; /* Align items to the start for flex wrapping */
+    flex-wrap: wrap; /* Allow items to wrap when space is limited */
+}
+
+/* Default desktop layout */
+.footer-logo-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Centers content horizontally */
+    justify-content: center; /* Centers content vertically */
+    flex: 1; /* Occupies 1 unit of space on desktop */
+    min-width: 0;
+    order: 1; /* Default order: logo first */
+}
+
+.footer-logo-container img {
+    width: 150px;
+}
+
+/* Overall links container, which will become the accordion wrapper on mobile */
+.footer-links-container {
+    display: flex; /* Flexbox for horizontal distribution on desktop */
+    gap: 40px; /* Space between each set of links (Link header 1, 2, 3) */
+    flex: 3; /* Occupies 3 units of space on desktop */
+    min-width: 0;
+    order: 2; /* Default order: links second */
+}
+
+/* Each individual link column within the footer-links-container */
+.footer-links-container > div {
+    flex: 1; /* Each link column takes equal space within its parent */
+    min-width: 0;
+}
+
+/* Accordion specific styles (desktop - non-accordion state) */
+.accordion-header {
+    display: flex;
+    justify-content: space-between; /* Space out title and icon */
+    align-items: center;
+    cursor: default; /* Not clickable on desktop */
+    padding: 0; /* Remove default h3 padding */
+    margin: 0 0 10px 0; /* Adjust margin for desktop spacing */
+}
+
+/* --- FIX FOR HIDING CHEVRON ON DESKTOP --- */
+.accordion-icon {
+    display: none !important; /* Force hide on desktop, even if other rules try to show it */
+}
+/* --- END FIX --- */
+
+.accordion-content {
+    /* On desktop, content is always visible, so no display:none here */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer li {
+    margin-bottom: 5px;
+}
+
+footer a {
+    color: #f0f2f2;
+    text-decoration: none;
+}
+
+footer p {
+    color: #f0f2f2;
+    text-align: center; /* Center copyright text under logo */
+}
+
+/* --- Media Query for Accordion Layout (screen width less than 1000px) --- */
+@media (max-width: 999px) {
+    footer {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 20px;
+    }
+
+    .footer-links-container {
+        flex: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 0;
+        order: 1;
+    }
+
+    .footer-links-container > div {
+        flex: none;
+        width: 100%;
+        border-bottom: 2px solid #f0f2f250;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+    .footer-links-container > div:last-of-type {
+        border-bottom: none;
+        margin-bottom: 0;
+    }
+
+    .accordion-header {
+        cursor: pointer;
+        padding: 10px 0; /* Keeps original padding for the clickable area */
+        margin-bottom: 0;
+        /* --- ADD THIS FOR ALIGNMENT --- */
+        padding-left: 0; /* Remove any default left padding on the h3 */
+        /* --- END ADDITION --- */
+    }
+
+    .accordion-icon {
+        display: block !important;
+        transition: transform 0.3s ease;
+        color: #f0f2f2;
+    }
+
+    .accordion-content {
+        display: none;
+        /* --- ADJUST THIS FOR ALIGNMENT --- */
+        padding-left: 0; /* Remove default UL padding */
+        /* You might want a small visual indent. If so, use something like: */
+        /* padding-left: 15px; */ /* Adjust this value if you want a slight indent */
+        /* --- END ADJUSTMENT --- */
+        transition: all 0.3s ease-out;
+    }
+
+    .accordion-item.active .accordion-content {
+        display: block;
+    }
+
+    .accordion-item.active .accordion-icon {
+        transform: rotate(90deg);
+    }
+
+    .footer-logo-container {
+        flex: none;
+        width: 100%;
+        order: 2;
+        margin-top: 0px;
+        /* Ensure mobile centering is maintained */
+        margin-right: 0; /* Override desktop auto margin */
+        align-items: center; /* Center items again on mobile */
+    }
+
+    footer p {
+        text-align: center; /* Center copyright text on mobile */
+    }
+}
